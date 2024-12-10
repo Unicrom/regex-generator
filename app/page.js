@@ -3,9 +3,9 @@
 import StringInput from "./input";
 import { BsQuestionSquare } from "react-icons/bs";
 import { MdContentCopy } from "react-icons/md";
-import { IoIosArrowDropdown } from "react-icons/io";
-import { IoAdd } from "react-icons/io5";
+import { IoIosArrowDropdown, IoIosAdd } from "react-icons/io";
 import { useState } from "react";
+import { VscSettings } from "react-icons/vsc";
 
 export default function Home() {
   const [fieldIDs, setID] = useState([{ fieldID: 1 }, { fieldID: 2 }]);
@@ -17,9 +17,9 @@ export default function Home() {
   function newField() {
     let newFieldIDs = [];
     for (let field in fieldIDs) {
-      newFieldIDs.push(fieldIDs[field])
+      newFieldIDs.push(fieldIDs[field]);
     }
-    newFieldIDs.push({fieldID: fieldIDs[fieldIDs.length -1].fieldID+1})
+    newFieldIDs.push({ fieldID: fieldIDs[fieldIDs.length - 1].fieldID + 1 });
     setID(newFieldIDs);
   }
 
@@ -38,9 +38,9 @@ export default function Home() {
                 className="transition cursor-pointer fill-gray-400 hover:fill-gray-300"
               />
             </p>
-            <IoIosArrowDropdown className="transition cursor-pointer fill-gray-400 hover:fill-gray-300 w-[3em] h-full" />
+            {/* <IoIosArrowDropdown className="transition cursor-pointer fill-gray-400 hover:fill-gray-300 w-[3em] h-full" /> */}
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="transition-all flex flex-col gap-4">
             {fieldIDs.map((field) => (
               <StringInput
                 key={field.fieldID}
@@ -48,12 +48,15 @@ export default function Home() {
                 onRemove={(fieldID) => removeField(fieldID)}
               />
             ))}
-
           </div>
-          <div>
-            <button onClick={() => newField()}>
-              <IoAdd /> Field
+          <div className="transition-all flex w-[55em] h-[3em] justify-end items-center">
+            <button onClick={() => newField()} className="transition-all w-auto h-full flex justify-center items-center p-0 pr-3 gap-0 outline outline-offset-2 outline-2 outline-gray-400 hover:outline-gray-300 rounded-md text-3xl">
+            <IoIosAdd size={48} />
+              Field
             </button>
+            {/* <button>
+              <VscSettings />
+            </button> */}
           </div>
         </div>
       </div>
