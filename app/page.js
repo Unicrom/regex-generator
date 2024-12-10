@@ -4,6 +4,7 @@ import StringInput from "./input";
 import { BsQuestionSquare } from "react-icons/bs";
 import { MdContentCopy } from "react-icons/md";
 import { IoIosArrowDropdown } from "react-icons/io";
+import { IoAdd } from "react-icons/io5";
 import { useState } from "react";
 
 export default function Home() {
@@ -13,10 +14,13 @@ export default function Home() {
       prevFields.filter((field) => field.fieldID != fieldID)
     );
   }
-  function newID() {
-    let fieldID_copy = fieldIDs;
-    fieldID_copy.append({ fieldID: fieldIDs[-1] + 1 });
-    setID(fieldID_copy);
+  function newField() {
+    let newFieldIDs = [];
+    for (let field in fieldIDs) {
+      newFieldIDs.push(fieldIDs[field])
+    }
+    newFieldIDs.push({fieldID: fieldIDs[fieldIDs.length -1].fieldID+1})
+    setID(newFieldIDs);
   }
 
   return (
@@ -44,10 +48,11 @@ export default function Home() {
                 onRemove={(fieldID) => removeField(fieldID)}
               />
             ))}
+
           </div>
           <div>
-            <button>
-              
+            <button onClick={() => newField()}>
+              <IoAdd /> Field
             </button>
           </div>
         </div>
