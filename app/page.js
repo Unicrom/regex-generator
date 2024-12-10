@@ -15,17 +15,22 @@ export default function Home() {
     );
   }
   function newField() {
-    let newFieldIDs = [];
-    for (let field in fieldIDs) {
-      newFieldIDs.push(fieldIDs[field]);
+    if (fieldIDs.length <= 0) {
+      setID([{ fieldID: 1 }]);
     }
-    newFieldIDs.push({ fieldID: fieldIDs[fieldIDs.length - 1].fieldID + 1 });
-    setID(newFieldIDs);
+    else {
+      let newFieldIDs = [];
+      for (let field in fieldIDs) {
+        newFieldIDs.push(fieldIDs[field]);
+      }
+      newFieldIDs.push({ fieldID: fieldIDs[fieldIDs.length - 1].fieldID + 1 });
+      setID(newFieldIDs);
+    }
   }
 
   return (
     <div>
-      <div className="grid h-screen w-screen grid-rows-[2fr,5fr] gap-2">
+      <div className="grid h-screen w-screen grid-rows-[3fr,5fr] gap-2">
         <header className="flex justify-center items-end font-mono text-[5em]">
           <h1>Regex Generator</h1>
         </header>
@@ -40,7 +45,7 @@ export default function Home() {
             </p>
             {/* <IoIosArrowDropdown className="transition cursor-pointer fill-gray-400 hover:fill-gray-300 w-[3em] h-full" /> */}
           </div>
-          <div className="transition-all flex flex-col gap-4">
+          <div className="transition-all flex flex-col gap-4 max-h-[20em] overflow-y-scroll overflow-x-visible p-1">
             {fieldIDs.map((field) => (
               <StringInput
                 key={field.fieldID}
@@ -50,8 +55,8 @@ export default function Home() {
             ))}
           </div>
           <div className="transition-all flex w-[55em] h-[3em] justify-end items-center">
-            <button onClick={() => newField()} className="transition-all w-auto h-full flex justify-center items-center p-0 pr-3 gap-0 outline outline-offset-2 outline-2 outline-gray-400 hover:outline-gray-300 rounded-md text-3xl">
-            <IoIosAdd size={48} />
+            <button onClick={() => newField()} className="group transition-all w-auto h-full flex justify-center items-center p-0 pr-3 gap-0 outline outline-offset-2 outline-2 outline-gray-400 hover:outline-gray-300 text-gray-400 hover:text-gray-300 rounded-md text-3xl">
+            <IoIosAdd size={48} className="transition-all fill-gray-400 group-hover:fill-gray-300"/>
               Field
             </button>
             {/* <button>
